@@ -1,0 +1,30 @@
+.wrapper {
+  position: relative;
+}
+
+.active > * {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15) !important;
+  animation: highlight-fade 2s ease forwards;
+}
+
+@keyframes highlight-fade {
+  0%   { box-shadow: 0 0 0 4px rgba(99,102,241,.30); }
+  100% { box-shadow: 0 0 0 3px rgba(99,102,241,.12); }
+}
+
+.badge {
+  position: absolute;
+  top: -10px;
+  right: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+  border: 1px solid var(--color-primary-ring);
+  border-radius: var(--radius-pill);
+  padding: 1px 7px;
+  pointer-events: none;
+  white-space: nowrap;
+}

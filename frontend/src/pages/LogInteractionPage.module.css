@@ -1,0 +1,47 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--color-bg);
+}
+
+.main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: var(--panel-gap);
+  padding: 20px 24px 24px;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  /* Stretch both columns to fill remaining viewport height */
+  height: calc(100vh - var(--header-h));
+  overflow: hidden;
+}
+
+.formColumn {
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.chatColumn {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── Responsive: stack on narrow screens ─────────────────────── */
+@media (max-width: 900px) {
+  .main {
+    grid-template-columns: 1fr;
+    height: auto;
+    overflow: visible;
+  }
+  .formColumn,
+  .chatColumn {
+    overflow: visible;
+  }
+  .chatColumn {
+    height: 520px;
+  }
+}

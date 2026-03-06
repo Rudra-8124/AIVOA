@@ -1,0 +1,32 @@
+# ─────────────────────────────────────────────────────────────────
+# docker-compose.yml – Local development stack
+#
+# Database: Supabase (cloud PostgreSQL) — no local db service needed.
+# Service:  backend – FastAPI app (hot-reload via uvicorn)
+# ─────────────────────────────────────────────────────────────────
+
+services:
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: aivoa_backend
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql+asyncpg://postgres.vstmmxrtmeobddyxtrtv:2fxFggUoAlX2O2hW@aws-1-ap-northeast-2.pooler.supabase.com:5432/postgres
+      GROQ_API_KEY: ${GROQ_API_KEY}
+      LLM_MODEL: llama-3.1-8b-instant
+      APP_ENV: development
+      APP_HOST: 0.0.0.0
+      APP_PORT: 8000
+      CORS_ORIGINS: http://localhost:5173,http://localhost:3000
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app        # mount source for hot-reload
+    command: >
+      uvicorn app.main:app
+      --host 0.0.0.0
+      --port 8000
+      --reload

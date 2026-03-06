@@ -1,0 +1,64 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  min-height: 40px;
+  padding: 6px 10px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  cursor: text;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.container:focus-within {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--color-primary-light);
+  border: 1px solid var(--color-primary-ring);
+  color: var(--color-primary);
+  border-radius: var(--radius-pill);
+  padding: 3px 10px 3px 10px;
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.chipRemove {
+  background: none;
+  border: none;
+  padding: 0;
+  line-height: 1;
+  font-size: 15px;
+  cursor: pointer;
+  color: var(--color-primary);
+  opacity: 0.6;
+  transition: opacity var(--transition);
+  margin-left: 1px;
+}
+
+.chipRemove:hover { opacity: 1; }
+
+.input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 13.5px;
+  color: var(--color-text);
+  min-width: 120px;
+  flex: 1;
+  padding: 2px 0;
+}
+
+.input::placeholder {
+  color: var(--color-placeholder);
+}

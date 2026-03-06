@@ -1,0 +1,66 @@
+.card {
+  background: linear-gradient(135deg, #eef2ff 0%, #f0fdf4 100%);
+  border: 1px solid var(--color-primary-ring);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-left: 38px;  /* align under AI avatar */
+  font-size: 12px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-bottom: 1px solid rgba(165,180,252,.4);
+  background: rgba(255,255,255,.5);
+}
+
+.icon {
+  font-size: 13px;
+}
+
+.title {
+  font-weight: 600;
+  color: var(--color-primary);
+  flex: 1;
+}
+
+.count {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-primary);
+  background: rgba(99,102,241,.12);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+}
+
+.grid {
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.row {
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+}
+
+.fieldLabel {
+  min-width: 72px;
+  font-weight: 600;
+  color: var(--color-text-2);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  flex-shrink: 0;
+}
+
+.fieldValue {
+  color: var(--color-text);
+  font-size: 12px;
+  line-height: 1.4;
+  word-break: break-word;
+}

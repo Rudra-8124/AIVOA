@@ -1,0 +1,254 @@
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.cardHeader {
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--color-border);
+  background: linear-gradient(to bottom, #fafbff, var(--color-surface));
+}
+
+.cardTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.2px;
+}
+
+.cardSubtitle {
+  font-size: 12.5px;
+  color: var(--color-text-2);
+  margin-top: 4px;
+}
+
+/* ── Banners ─────────────────────────────────────────────────── */
+.successBanner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background: var(--color-positive-bg);
+  border-bottom: 1px solid #bbf7d0;
+  font-size: 13px;
+  color: var(--color-positive);
+  font-weight: 500;
+}
+
+.bannerClose {
+  margin-left: auto;
+  background: none;
+  border: 1px solid var(--color-positive);
+  color: var(--color-positive);
+  border-radius: var(--radius-pill);
+  padding: 3px 12px;
+  font-size: 12px;
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+}
+.bannerClose:hover {
+  background: var(--color-positive);
+  color: #fff;
+}
+
+.errorBanner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background: var(--color-negative-bg);
+  border-bottom: 1px solid #fecaca;
+  font-size: 13px;
+  color: var(--color-negative);
+  font-weight: 500;
+}
+
+/* ── Form ────────────────────────────────────────────────────── */
+.form {
+  padding: 20px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.grow {
+  flex: 1;
+  min-width: 120px;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--color-text-2);
+  letter-spacing: 0.1px;
+}
+
+.required {
+  color: var(--color-negative);
+}
+
+/* ── Inputs ──────────────────────────────────────────────────── */
+.input,
+.select,
+.textarea {
+  width: 100%;
+  font-family: inherit;
+  font-size: 13.5px;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 8px 11px;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  outline: none;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--color-placeholder);
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+}
+
+.select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394a3b8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 30px;
+  cursor: pointer;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.5;
+}
+
+/* ── Sentiment ───────────────────────────────────────────────── */
+.sentimentRow {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sentimentBtn {
+  flex: 1;
+  min-width: 90px;
+  background: var(--color-surface-2);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 8px 14px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-2);
+  transition: border-color var(--transition), background var(--transition),
+              color var(--transition), box-shadow var(--transition);
+}
+
+.sentimentBtn:hover {
+  border-color: var(--color-primary-ring);
+  background: var(--color-primary-light);
+}
+
+.sentimentActive.sentiment_positive {
+  border-color: var(--color-positive);
+  background: var(--color-positive-bg);
+  color: var(--color-positive);
+  box-shadow: 0 0 0 3px rgba(22,163,74,.12);
+}
+.sentimentActive.sentiment_neutral {
+  border-color: var(--color-neutral);
+  background: var(--color-neutral-bg);
+  color: var(--color-neutral);
+  box-shadow: 0 0 0 3px rgba(217,119,6,.12);
+}
+.sentimentActive.sentiment_negative {
+  border-color: var(--color-negative);
+  background: var(--color-negative-bg);
+  color: var(--color-negative);
+  box-shadow: 0 0 0 3px rgba(220,38,38,.12);
+}
+
+/* ── Actions ─────────────────────────────────────────────────── */
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 4px;
+}
+
+.btnPrimary,
+.btnSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 22px;
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: background var(--transition), transform var(--transition), opacity var(--transition);
+}
+
+.btnPrimary {
+  background: var(--color-primary);
+  color: #fff;
+}
+.btnPrimary:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+}
+.btnPrimary:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.btnSecondary {
+  background: var(--color-surface-2);
+  color: var(--color-text-2);
+  border: 1.5px solid var(--color-border);
+}
+.btnSecondary:hover:not(:disabled) {
+  background: var(--color-border);
+}
+
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.65s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
