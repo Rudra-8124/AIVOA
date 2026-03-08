@@ -242,14 +242,52 @@ def tool_selector_node(state: AgentState) -> dict:
         }
 
     elif selected_tool == "fetch_hcp_history":
+        # entity_extraction is tuned for logging prompts — for query_history
+        # the hcp_name is almost always in the raw input even if extraction
+        # missed it. Fall back to extracting it from the raw text via LLM
+        # would add latency, so instead we parse it heuristically:
+        #   "show me ... with Dr. X"  →  capture "Dr. X ..."
+        hcp_name_resolved = entities.get("hcp_name") or ""
+        if not hcp_name_resolved:
+            import re
+            raw = state.get("raw_user_input", "")
+            # Match "Dr./Prof./Mr./Ms. Firstname Lastname"
+            m = re.search(
+                r"\b(Dr\.?|Prof\.?|Mr\.?|Ms\.?|Mrs\.?)\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)",
+                raw,
+            )
+            if m:
+                hcp_name_resolved = m.group(0).strip()
+            else:
+                # Last resort — anything after "with" or "for" + capital word
+                m2 = re.search(r"\b(?:with|for|about)\s+([A-Z][a-zA-Z\s]{2,30})", raw)
+                if m2:
+                    hcp_name_resolved = m2.group(1).strip()
+
         tool_input = {
-            "hcp_name":         entities.get("hcp_name", ""),
+            "hcp_name":         hcp_name_resolved,
             "from_date":        entities.get("from_date"),
             "to_date":          entities.get("to_date"),
             "sentiment_filter": entities.get("sentiment"),
             "page":             1,
             "page_size":        5,
         }
+
+        # If we still have no name, short-circuit now with a clear error
+        # rather than letting Pydantic throw a validation error downstream
+        if not tool_input["hcp_name"]:
+            return {
+                "selected_tool": "none",
+                "tool_input": {},
+                "tool_result": {
+                    "success": False,
+                    "error": (
+                        "I couldn't identify the HCP name in your message. "
+                        "Please include the doctor's name, e.g. "
+                        "'Show me history for Dr. Priya Sharma'."
+                    ),
+                },
+            }
 
     elif selected_tool == "suggest_followup":
         # interaction_id may come from a prior log in this session
@@ -311,7 +349,9 @@ async def tool_executor_node(state: AgentState) -> dict:
     tool_input = state.get("tool_input") or {}
 
     if selected_tool == "none":
-        return {"tool_result": None, "action_taken": None}
+        # tool_selector may have already set a short-circuit tool_result (e.g. missing HCP name)
+        pre_set_result = state.get("tool_result")
+        return {"tool_result": pre_set_result, "action_taken": None}
 
     # ── Import and invoke the appropriate tool ─────────────────────
     try:
